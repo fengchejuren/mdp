@@ -5,7 +5,7 @@
  * @author Rock King 2014年12月18日 上午1:25:15
  * @version V1.0  
  */ 
-package myfirst.web;
+package myfirst.domain.vo;
 
 /** 
  * @Description: TODO

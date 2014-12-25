@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>资源下载</title>
+<title>资源共享</title>
 <link rel="stylesheet" href="${ctx}/css/main.css">
  <script src="${ctx}/js/jquery_2.1.3.js"></script>
 <script type="text/javascript">
@@ -56,7 +56,7 @@
 </ul>
 </div>
  <div class="filecontent">
- <form action="${ctx}/file/fileup.html" method="post" enctype="multipart/form-data">
+ <form action="${ctx}/file/filelistup.html" method="post" enctype="multipart/form-data">
  <table>
  	<tr>
  		<td class="left">资源类型</td>
@@ -78,7 +78,9 @@
  	<tr>
  		<td class="left">选择资源</td>
  		<td class="right">
- 			<input type="file" name="myfile" />
+ 			<input type="file" name="file1" /> <input type="text" name="alais" /><br />  
+		    <input type="file" name="file2" /> <input type="text" name="alais" /><br />  
+		    <input type="file" name="file3" /> <input type="text" name="alais" /><br />  
  		</td>
  	</tr>
  	<tr>

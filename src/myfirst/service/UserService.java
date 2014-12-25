@@ -8,7 +8,7 @@
 package myfirst.service;
 
 import myfirst.dao.UserDao;
-import myfirst.domain.User;
+import myfirst.domain.pojo.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
