@@ -14,7 +14,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import myfirst.domain.vo.WeatherVO;
 
-public class AppUtils {
+public class AppUtil {
 
 	public static WeatherVO getBaiduWeather(String location) {
 		String pointcut = "http://api.map.baidu.com/telematics/v3/weather?output=json&ak=G0sQ26x75f4YRvex2lFTA8o3&location=";
