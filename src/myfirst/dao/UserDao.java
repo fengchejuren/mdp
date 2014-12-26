@@ -10,7 +10,7 @@ package myfirst.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import myfirst.domain.User;
+import myfirst.domain.pojo.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

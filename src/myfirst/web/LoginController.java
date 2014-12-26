@@ -9,7 +9,8 @@ package myfirst.web;
 
 import javax.servlet.http.HttpServletRequest;
 
-import myfirst.domain.User;
+import myfirst.domain.pojo.User;
+import myfirst.domain.vo.LoginCommand;
 import myfirst.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
