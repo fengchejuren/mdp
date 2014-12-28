@@ -22,6 +22,12 @@ public class HomePageController {
 	@Autowired
 	private HomePageService homePageService;
 	
+	/** 跳转到我的主页（如果cookies上保存有我的网站的信息，则将信息加载进去）
+	 * @param request
+	 * @return   
+	 * @see Any changes please send mail to:superman166@126.com  
+	 * ~!^ Keep bugs away and code with U!	
+	 */
 	@RequestMapping(value="/index.html")
 	public ModelAndView index(HttpServletRequest request){
 		List<Map<String, String>> cookieList = homePageService.getWebSiteByCookie(request);
@@ -29,16 +35,27 @@ public class HomePageController {
 						.addObject("cookieList",cookieList);
 	}
 	
+	/** 修改我的网址导航
+	 * @return   
+	 * @see Any changes please send mail to:superman166@126.com  
+	 * ~!^ Keep bugs away and code with U!	
+	 */
 	@RequestMapping(value="/myfavoritewebsite.html")
-	public String domyfavoritewebsite(){
-		return "homepage/myfavoritewebsite";
+	public ModelAndView domyfavoritewebsite(HttpServletRequest request){
+		List<Map<String, String>> cookieList = homePageService.getWebSiteByCookie(request);
+		return new ModelAndView("homepage/myfavoritewebsite")
+					.addObject("cookieList",cookieList);
 	}
 	
+	/** 保存我的网址cookies
+	 * @return   
+	 * @see Any changes please send mail to:superman166@126.com  
+	 * ~!^ Keep bugs away and code with U!	
+	 */
 	@RequestMapping(value="/dosavewebsite.html")
 	public ModelAndView dosavewebsite(HttpServletRequest request,HttpServletResponse response){
-		String sitename = request.getParameter("sitename");
-		String siteurl = request.getParameter("siteurl");
-		homePageService.doSaveCookies(response, CookiesUtil.WEBSITECOOKIENAME, sitename+"|"+siteurl, 365*60*60);
+		String siteInfo = request.getParameter("siteInfo");
+		homePageService.doSaveCookies(response, CookiesUtil.WEBSITECOOKIENAME, siteInfo, 365*60*60);
 		return new ModelAndView(new RedirectView("index.html", true));
 	}
 }

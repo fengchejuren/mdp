@@ -1,6 +1,9 @@
 package myfirst.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,20 +28,29 @@ public class HomePageService {
 		CookiesUtil.addCookie(response, name, value, maxAge);
 	}
 	
-	/**得到我的网站的信息
+	/**得到cookies保存的我的网站的信息
 	 * @param request
 	 * @return
 	 */
 	public List<Map<String, String>> getWebSiteByCookie(HttpServletRequest request){
-		List<Map<String, String>> resultList = new ArrayList<Map<String,String>>();
-		Cookie cookie = CookiesUtil.getCookieByCookieName(request, CookiesUtil.WEBSITECOOKIENAME);
-		if(cookie != null){
-			String siteInfoString = cookie.getValue();
-			String[] sites = siteInfoString.split("\\|");
-			for(int i=0;i<sites.length;i++){
-				
+		List<Map<String, String>> websiteListList = new ArrayList<Map<String,String>>();
+		try {
+			Cookie cookie = CookiesUtil.getCookieByCookieName(request, CookiesUtil.WEBSITECOOKIENAME);
+			if(cookie != null){
+				String siteInfoString = cookie.getValue();
+				siteInfoString = URLDecoder.decode(siteInfoString, "UTF-8");
+				String[] sites = siteInfoString.split("\\|");
+				for(int i=0;i<sites.length && i<10;i=i+2){	//最多只能保存5个网址
+					Map<String, String> siteMap = new HashMap<String, String>();
+					siteMap.put("sitename", sites[i]);
+					siteMap.put("siteurl", sites[i+1]);
+					websiteListList.add(siteMap);
+				}
 			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return resultList;
+		return websiteListList;
 	}
 }

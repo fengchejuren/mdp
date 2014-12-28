@@ -10,5 +10,5 @@
 	<li><a href="${ctx}/file/index.html">资源共享</a></li>
 	<li><a>生活助手</a></li>
 </ul>
-<div style="clear:all;"></div>
+<div style="clear:both;"></div>
 </div>

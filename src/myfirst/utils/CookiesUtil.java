@@ -1,5 +1,7 @@
 package myfirst.utils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,11 +27,17 @@ public class CookiesUtil {
 	 * @param maxAge
 	 */
 	public static void addCookie(HttpServletResponse response,String name,String value,int maxAge){
-		Cookie cookie = new Cookie(name, value);
-		if(maxAge>0){
-			cookie.setMaxAge(maxAge);
+		try {
+			value = URLEncoder.encode(value, "UTF-8");
+			Cookie cookie = new Cookie(name, value);
+			if(maxAge>0){
+				cookie.setMaxAge(maxAge);
+			}
+			response.addCookie(cookie);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		response.addCookie(cookie);
 	}
 	
 	/**通过cookieName得到Cookie

@@ -97,4 +97,7 @@ ul,ul li {
 	border: 3px solid #ccc;
 	width:240px;
 }
-
+.btn_after_input {
+	width:12px;
+	margin-left:5px;
+}
