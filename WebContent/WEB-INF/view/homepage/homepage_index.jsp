@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" import="myfirst.utils.CookiesUtil" %>
 <%@include file="../include/head.jsp" %>
 <html>
 <head>
@@ -44,8 +45,23 @@ color: #000;
 <script src="${ctx}/js/jquery_2.1.3.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		getwebsitebyCookie();
 	});
-		
+	//根据cookies得到我的网址
+	function getwebsitebyCookie(){
+		var cookieObj = document.cookie.split("; ");
+		var htmlStr = '';
+		for(var i=0;i<cookieObj.length;i++){
+			var arr = cookieObj[i].split("=");
+			if("<%=CookiesUtil.WEBSITECOOKIENAME%>" == arr[0]){
+				var cookieinfo = decodeURI(arr[1]).split("|");
+				for(var i=0;i<cookieinfo.length;i=i+2){		
+					htmlStr += '<li><a href="'+cookieinfo[i+1]+'" target="_blank">'+cookieinfo[i]+'</a></li>';	
+				}
+			}
+			$("#mysite").append(htmlStr);
+		}
+	}	
 </script>
 </head>
 <body>
@@ -88,11 +104,7 @@ color: #000;
 </ul>
 <div style="clear: both;"></div>
 <h3><a href="${ctx}/homepage/myfavoritewebsite.html">我的网站<font color="#7F8D8A" size="0.9em">---戳一下,把自己喜欢的网站放上去</font></a></h3>
-<ul>
-<c:forEach items="${cookieList}" var="site">
-	<li><a href="${site.siteurl}" target="_blank">${site.sitename}</a></li>
-</c:forEach>
-</ul>
+<ul id="mysite"></ul>
 <div style="clear:both;"></div></div>
 </div>
 </body>

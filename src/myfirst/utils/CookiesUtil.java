@@ -28,6 +28,7 @@ public class CookiesUtil {
 	 */
 	public static void addCookie(HttpServletResponse response,String name,String value,int maxAge){
 		try {
+//			因为可能有中文，进行转码
 			value = URLEncoder.encode(value, "UTF-8");
 			Cookie cookie = new Cookie(name, value);
 			if(maxAge>0){

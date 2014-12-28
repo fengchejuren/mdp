@@ -38,7 +38,7 @@ public class HomePageService {
 			Cookie cookie = CookiesUtil.getCookieByCookieName(request, CookiesUtil.WEBSITECOOKIENAME);
 			if(cookie != null){
 				String siteInfoString = cookie.getValue();
-				siteInfoString = URLDecoder.decode(siteInfoString, "UTF-8");
+				siteInfoString = URLDecoder.decode(siteInfoString, "UTF-8");	//因为可能有中文，转码
 				String[] sites = siteInfoString.split("\\|");
 				for(int i=0;i<sites.length && i<10;i=i+2){	//最多只能保存5个网址
 					Map<String, String> siteMap = new HashMap<String, String>();
@@ -48,7 +48,6 @@ public class HomePageService {
 				}
 			}
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return websiteListList;

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" import="myfirst.utils.CookiesUtil" %>
 <%@include file="../include/head.jsp" %>
 <html>
 <head>
@@ -76,17 +77,48 @@ color: #000;
 		$(".add").click(function(){
 			addItem(this);
 		});
-		$(".delete").click(function(){
-			deleteItem(this);
-		});
-		
-		var cookieObj = document.cookie;
+		//根据cookies得到我的网址
+		getwebsitebyCookie();
 	});
-	
-	//增加网址
+	//根据cookies得到我的网址
+	function getwebsitebyCookie(){
+		var cookieObj = document.cookie.split("; ");
+		var htmlStr = '';
+		for(var i=0;i<cookieObj.length;i++){
+			var arr = cookieObj[i].split("=");
+			if("<%=CookiesUtil.WEBSITECOOKIENAME%>" == arr[0]){
+				var cookieinfo = decodeURI(arr[1]).split("|");
+				for(var i=0;i<cookieinfo.length;i=i+2){		
+					htmlStr += '<div class="websiteItem">网站名称：<input name="sitename" value="'+cookieinfo[i]+'" class="sitename" '
+						+'maxlength="8" />网站地址：<input name="siteurl" value="'+cookieinfo[i+1]+'" '
+						+'class="siteurl" maxlength="50"/>';
+					if(i>=cookieinfo.length-2){	//最后一条记录，后面是增加按钮
+						htmlStr += '<img title="增加" class="btn_after_input add" src="${ctx}/images/btn/add_icon.png" alt="增加" onclick="addItem(this)"/></div>';
+					}else{	//不是最后一条记录，后面是删除按钮
+						htmlStr += '<img title="删除" class="btn_after_input delete" onclick="deleteItem(this);"'
+							+'src="${ctx}/images/btn/close_icon.png" alt="删除"/></div>';
+					}	
+				}
+				
+			}
+			if(!htmlStr){	//htmlStr为空，即没有记录,增加一个空的input输入框
+				htmlStr = '<div class="websiteItem">网站名称：<input name="sitename" class="sitename" '
+							+'maxlength="8" />网站地址：<input name="siteurl" class="siteurl" maxlength="50"/>'
+							+'<img title="增加" class="btn_after_input add" src="${ctx}/images/btn/add_icon.png" alt="增加" onclick="addItem(this)"/></div>';
+			}
+			$(".myfavoritewebsite").prepend(htmlStr);
+		}
+	}
+	//增加cookie
+	function addCookie(data){
+		data = decodeURI(data);
+		var str = "<%=CookiesUtil.WEBSITECOOKIENAME%>="+data;
+		document.cookie = str;
+	}
+	//增加网址输入框
 	function addItem(obj){
 		var listObj = $(".websiteItem");
-		if(listObj.length>=5){
+		if(listObj.length>=5){		//最多只能保存5条记录
 			alert("用户最多只能保存5个网址");
 		}else{
 			var htmlStr = '<div class="websiteItem">网站名称：<input '
@@ -122,8 +154,8 @@ color: #000;
 			return false;
 		}else{
 			data = data.substring(0,data.length-1);
-			$("#siteInfo").val(data);
-			window.location.href="${ctx}/homepage/dosavewebsite.html?siteInfo="+data;
+			addCookie(data);
+			window.location.href="${ctx}/homepage/index.html";
 		}
 		
 	}
@@ -137,20 +169,6 @@ color: #000;
 <!-- 导航栏 -->
 <%@include file="../include/navigationbar.jsp" %>
 <div class="myfavoritewebsite">
-<input type="hidden" id="siteInfo" name="siteInfo"/>
-<c:forEach items="${cookieList}" var="item" varStatus="count">
-	<div class="websiteItem">
-		网站名称：<input value="${item.sitename}" name="sitename" class="sitename" maxlength="8" />网站地址：<input name="siteurl" value="${item.siteurl}" class="siteurl" maxlength="50"/>
-	<c:choose>
-		<c:when test="${not count.last}">
-			<img title="删除" class="btn_after_input delete" src="${ctx}/images/btn/close_icon.png" alt="删除"/>
-		</c:when>
-		<c:otherwise>
-			<img title="增加" class="btn_after_input add" src="${ctx}/images/btn/add_icon.png" alt="增加"/>
-		</c:otherwise>
-	</c:choose>	
-	</div>
-</c:forEach>
 	<input type="button" class="submit_but" value="保 存" />
 	<div style="clear:both;"></div>
 </div>
