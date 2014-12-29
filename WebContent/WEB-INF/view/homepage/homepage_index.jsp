@@ -41,6 +41,10 @@ color: #000;
 .homepage_website_nav h3 {
 	margin-bottom: auto;
 }
+.homepage_news_list li{
+	width:100%;
+	text-align: left;
+}
 </style>
 <script src="${ctx}/js/jquery_2.1.3.js"></script>
 <script type="text/javascript">
@@ -54,6 +58,9 @@ color: #000;
 		for(var i=0;i<cookieObj.length;i++){
 			var arr = cookieObj[i].split("=");
 			if("<%=CookiesUtil.WEBSITECOOKIENAME%>" == arr[0]){
+				var now = new Date();
+				now.setDate(now.getDate()+180);	//cookies过期日期为180天
+				document.cookie = arr[0]+"="+arr[1]+";expires="+now.toGMTString();		//更新cookies 
 				var cookieinfo = decodeURI(arr[1]).split("|");
 				for(var i=0;i<cookieinfo.length;i=i+2){		
 					htmlStr += '<li><a href="'+cookieinfo[i+1]+'" target="_blank">'+cookieinfo[i]+'</a></li>';	
@@ -105,7 +112,18 @@ color: #000;
 <div style="clear: both;"></div>
 <h3><a href="${ctx}/homepage/myfavoritewebsite.html">我的网站<font color="#7F8D8A" size="0.9em">---戳一下,把自己喜欢的网站放上去</font></a></h3>
 <ul id="mysite"></ul>
-<div style="clear:both;"></div></div>
+<div style="clear:both;"></div>
+<!-- 新闻抓取 -->
+<h3>新闻天下</h3>
+<div>
+	<ul class="homepage_news_list">
+	<c:forEach items="${crawlerVOList}" var="crawler">
+		<li style="float: none;"><a href="${crawler.url}" target="_blank">${crawler.title}</a><br></li>
+	</c:forEach>
+	</ul>
+</div>
+<div style="clear:both;"></div>
+</div>
 </div>
 </body>
 </html>

@@ -111,8 +111,10 @@ color: #000;
 	}
 	//增加cookie
 	function addCookie(data){
-		data = decodeURI(data);
-		var str = "<%=CookiesUtil.WEBSITECOOKIENAME%>="+data;
+		data = encodeURI(data);
+		var now = new Date();
+		now.setDate(now.getDate()+180);	//cookies过期日期为180天
+		var str = "<%=CookiesUtil.WEBSITECOOKIENAME%>="+data+";expires="+now.toGMTString();
 		document.cookie = str;
 	}
 	//增加网址输入框

@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import myfirst.domain.vo.CrawlerVO;
 import myfirst.utils.CookiesUtil;
+import myfirst.utils.CrawlerUtil;
 
 import org.springframework.stereotype.Service;
 
@@ -51,5 +54,22 @@ public class HomePageService {
 			e.printStackTrace();
 		}
 		return websiteListList;
+	}
+	
+	/**抓取新浪、网易等网站的新闻头条
+	 * @return
+	 */
+	public List<CrawlerVO> getCrawlerVOs(){
+		List<CrawlerVO> list = new ArrayList<CrawlerVO>();
+		CrawlerUtil.downloadFile(CrawlerUtil.CRAWLER_163_URL);
+		CrawlerUtil.downloadFile(CrawlerUtil.CRAWLER_SINA_URL);
+		Random random = new Random();
+		for(int i=0;i<5;i++){
+			CrawlerVO crawlerVO = CrawlerUtil.crawlerVOs.get(random.nextInt(CrawlerUtil.crawlerVOs.size()));
+			if(!list.contains(crawlerVO)){
+				list.add(crawlerVO);
+			}
+		}
+		return list;
 	}
 }

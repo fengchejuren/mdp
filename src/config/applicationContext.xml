@@ -26,7 +26,7 @@
 		<property name="userName" value="llla"></property>
 		<property name="password" value="hao2134"></property>
 	</bean>
-	
+<!-- 
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -34,6 +34,15 @@
 		<property name="url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=Stu_db2;" />
 		<property name="username" value="sa" />
 		<property name="password" value="sur0ckKingOa" />
+	</bean>
+ -->	
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@172.16.24.73:1521:orcl;" />
+		<property name="username" value="ckb_ext" />
+		<property name="password" value="ckb_extadmin" />
 	</bean>
 
 	<aop:config proxy-target-class="true">
