@@ -25,8 +25,7 @@ public class HomePageController {
 	 */
 	@RequestMapping(value="/index.html")
 	public ModelAndView index(){
-		HomePageService service = new HomePageService();
-		List<CrawlerVO> crawlerVOList = service.getCrawlerVOs();
+		List<CrawlerVO> crawlerVOList = homePageService.getCrawlerVOList();
 		return new ModelAndView("homepage/homepage_index")
 						.addObject("crawlerVOList",crawlerVOList);
 	}

@@ -12,15 +12,20 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import myfirst.dao.HomePageDao;
 import myfirst.domain.vo.CrawlerVO;
 import myfirst.utils.CookiesUtil;
 import myfirst.utils.CrawlerUtil;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class HomePageService {
 
+	@Autowired
+	private HomePageDao homePageDao;
+	
 	/**保存我的网站cookie
 	 * @param response
 	 * @param name
@@ -56,20 +61,11 @@ public class HomePageService {
 		return websiteListList;
 	}
 	
-	/**抓取新浪、网易等网站的新闻头条
-	 * @return
+	/**从CrawlerUtil.crawlerVOs中随机取5条记录
+	 * @see Any changes please send mail to:superman166@126.com  
+	 * ~!^ Keep bugs away and code with U!	
 	 */
-	public List<CrawlerVO> getCrawlerVOs(){
-		List<CrawlerVO> list = new ArrayList<CrawlerVO>();
-		CrawlerUtil.downloadFile(CrawlerUtil.CRAWLER_163_URL);
-		CrawlerUtil.downloadFile(CrawlerUtil.CRAWLER_SINA_URL);
-		Random random = new Random();
-		for(int i=0;i<5;i++){
-			CrawlerVO crawlerVO = CrawlerUtil.crawlerVOs.get(random.nextInt(CrawlerUtil.crawlerVOs.size()));
-			if(!list.contains(crawlerVO)){
-				list.add(crawlerVO);
-			}
-		}
-		return list;
+	public List<CrawlerVO> getCrawlerVOList() {
+		return homePageDao.getCrawlerVOList();
 	}
 }
