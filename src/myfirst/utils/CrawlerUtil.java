@@ -54,7 +54,6 @@ public class CrawlerUtil {
 	 * @return
 	 */
 	public static void downloadFile(String urlStr,String contentId) {
-		CrawlerVO crawlerVO = new CrawlerVO();
 		URL url = null;
 		InputStream is = null;
 		BufferedReader in = null;
@@ -69,7 +68,6 @@ public class CrawlerUtil {
 			while ((line = in.readLine()) != null) {
 				buffer.append(line);
 			}
-			System.out.println(buffer.toString());
 			Document document = Jsoup.parse(buffer.toString());
 			Element element = document.getElementById(contentId);
 			Elements elements = element.getElementsByTag("a");
@@ -83,7 +81,7 @@ public class CrawlerUtil {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		} finally {		//清空内存，关闭资源
 			try {
 				in.close();
 				if (is != null) {

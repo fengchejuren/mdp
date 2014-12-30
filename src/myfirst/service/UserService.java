@@ -7,6 +7,7 @@
  */ 
 package myfirst.service;
 
+import myfirst.base.BaseService;
 import myfirst.dao.UserDao;
 import myfirst.domain.pojo.User;
 
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
  * @see ~!^ Keep bugs away and code with U!	 
  */
 @Service   //将userService标注为一个服务层的bean
-public class UserService {
+public class UserService extends BaseService {
 
 	@Autowired
 	private UserDao userDao;

@@ -9,6 +9,7 @@ package myfirst.web;
 
 import javax.servlet.http.HttpServletRequest;
 
+import myfirst.base.BaseController;
 import myfirst.domain.pojo.User;
 import myfirst.domain.vo.LoginCommand;
 import myfirst.service.UserService;
@@ -24,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @see ~!^ Keep bugs away and code with U!
  */
 @Controller
-public class LoginController {
+public class LoginController extends BaseController {
 
 	@Autowired
 	private UserService userService;

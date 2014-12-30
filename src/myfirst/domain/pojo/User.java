@@ -10,13 +10,15 @@ package myfirst.domain.pojo;
 import java.io.Serializable;
 import java.sql.Date;
 
+import myfirst.base.BasePOJO;
+
 /** 
  * @Description: TODO
  * @author Rock King 2014年12月17日 下午11:36:33 
  * @see ~!^ Keep bugs away and code with U!	 
  */
 
-public class User implements Serializable {
+public class User extends BasePOJO implements Serializable {
 
 	private int id;
 	private String userName;

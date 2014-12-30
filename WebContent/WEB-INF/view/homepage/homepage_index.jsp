@@ -6,50 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>我的主页</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/css/main.css">
-<style type="text/css">
-a:link {
-text-decoration: none;
-color: #000;
-}
-a:visited {
-text-decoration: none;
-color: #000;
-}
-a:hover {
-text-decoration: none;
-color: #000;
-}
-a:active {
-text-decoration: none;
-font-size: 14px;
-font-weight: bold;
-color: #000;
-}
-.homepage_website_nav {
-	background: #FFF;
-	margin-top: -20px;
-	padding:0 10px;
-}
-.homepage_website_nav ul {
-	width: 100%;
-	margin:0 10px 10px;
-	text-align: center;
-}
-.homepage_website_nav li {
-	width: 15%;
-}
-.homepage_website_nav h3 {
-	margin-bottom: auto;
-}
-.homepage_news_list li{
-	width:100%;
-	text-align: left;
-}
-</style>
 <script src="${ctx}/js/jquery_2.1.3.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		getwebsitebyCookie();
+		getwebsitebyCookie();	//根据cookies得到我的网址
+		$("#refresh_news").click(function(){
+			refreshnews();
+		});
 	});
 	//根据cookies得到我的网址
 	function getwebsitebyCookie(){
@@ -69,6 +32,23 @@ color: #000;
 			$("#mysite").append(htmlStr);
 		}
 	}	
+	//刷新新闻
+	function refreshnews(){
+		$.ajax({
+			type:"get",
+			url:"${ctx}/homepage/getAjaxNews.html",
+			dataType:"html",
+			success:function(data){
+				var result = eval("("+data+")");
+				var htmlStr = '<ul class="homepage_news_list">';
+				for(var i=0;i<result.length;i++){
+					htmlStr += '<li style="float: none;"><a href="'+result[i].url+'" target="_blank">'+result[i].title+'</a><br></li>';
+				}
+				htmlStr +='</ul>';
+				$("#news_content").html(htmlStr);
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -114,8 +94,8 @@ color: #000;
 <ul id="mysite"></ul>
 <div style="clear:both;"></div>
 <!-- 新闻抓取 -->
-<h3>新闻天下</h3>
-<div>
+<h3>新闻天下 <img src="${ctx}/images/btn/refresh_icon.png" style="float:right;" id="refresh_news" alt="刷新" title="刷新"/></h3>
+<div id="news_content">
 	<ul class="homepage_news_list">
 	<c:forEach items="${crawlerVOList}" var="crawler">
 		<li style="float: none;"><a href="${crawler.url}" target="_blank">${crawler.title}</a><br></li>

@@ -7,6 +7,7 @@
  */ 
 package myfirst.service;
 
+import myfirst.base.BaseService;
 import myfirst.domain.pojo.User;
 
 import org.junit.Test;
@@ -22,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/config/applicationContext.xml"})
-public class TestUserService {
+public class TestUserService extends BaseService {
 
 	@Autowired
 	private UserService userService;

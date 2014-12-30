@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import myfirst.base.BaseDAO;
 import myfirst.domain.vo.CrawlerVO;
 import myfirst.utils.CrawlerUtil;
 
@@ -25,7 +26,7 @@ import org.springframework.stereotype.Repository;
  * @see ~!^ Keep bugs away and code with U!
  */
 @Repository
-public class HomePageDao {
+public class HomePageDao extends BaseDAO {
 
 	/**
 	 * 存储CrawlerUtil.crawlerVOs的缓存信息。当正处于抓取新闻时CrawlerUtil.crawlerVOs清空，数据从tempList里面
@@ -39,7 +40,8 @@ public class HomePageDao {
 	 */
 	@Scheduled(cron="0 0 5,16 * * ?")	//每天凌晨5点钟，下午4点钟进行一次抓取
 	public void updateFileList() {
-		System.out.println("进行了一次抓取，开始时间是："+new Date().toString());
+		Date begin = new  Date();
+		logger.info("slf4j日志记录进行了一次抓取，开始时间是："+begin.toString());
 		for(CrawlerVO crawlerVO:CrawlerUtil.crawlerVOs){
 			CrawlerVO vo = new  CrawlerVO();
 			BeanUtils.copyProperties(crawlerVO, vo);
@@ -48,7 +50,8 @@ public class HomePageDao {
 		CrawlerUtil.crawlerVOs.clear();
 		CrawlerUtil.downloadFile(CrawlerUtil.CRAWLER_163_URL);
 		CrawlerUtil.downloadFile(CrawlerUtil.CRAWLER_SINA_URL);
-		System.out.println("进行了一次抓取，结束时间是："+new Date().toString());
+		Date end = new Date();
+		logger.info("进行了一次抓取，结束时间是："+end.toString()+". 花费时间是"+(end.getTime()-begin.getTime()));
 		tempList.clear();
 	}
 

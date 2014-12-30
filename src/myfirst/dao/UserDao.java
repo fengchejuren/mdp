@@ -10,6 +10,7 @@ package myfirst.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import myfirst.base.BaseDAO;
 import myfirst.domain.pojo.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ import org.springframework.stereotype.Repository;
  * @see ~!^ Keep bugs away and code with U!	 
  */
 @Repository   //通过spring注解定义一个dao
-public class UserDao {
+public class UserDao extends BaseDAO {
 
-	@Autowired
+	//@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	public int getMatchCount(String userName,String pwd){

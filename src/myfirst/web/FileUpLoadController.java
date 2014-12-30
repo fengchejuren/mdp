@@ -15,6 +15,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import myfirst.base.BaseController;
 import myfirst.utils.FileUtil;
 
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,7 @@ import org.springframework.web.portlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/file")
-public class FileUpLoadController {
+public class FileUpLoadController extends BaseController {
 
 	@RequestMapping(value="/index.html")
 	public String filePage(){

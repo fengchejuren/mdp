@@ -6,22 +6,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import myfirst.base.BaseService;
 import myfirst.dao.HomePageDao;
 import myfirst.domain.vo.CrawlerVO;
 import myfirst.utils.CookiesUtil;
-import myfirst.utils.CrawlerUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HomePageService {
+public class HomePageService extends BaseService {
 
 	@Autowired
 	private HomePageDao homePageDao;
