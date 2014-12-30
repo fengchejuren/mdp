@@ -5,24 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>资源共享</title>
 <link rel="stylesheet" href="${ctx}/css/main.css">
- <script src="${ctx}/js/jquery_2.1.3.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(".sidebar_content").click(function(){
-				window.open("js1.html");	
-		});
-		$(".sidebar_close_icon").click(function(){
-			$(this).parent().remove();	
-		});
-		$(".assistant").mouseover(function(e){
-			$(this).after('<div style="background:#ccc;position:absolute;left:'+(e.pageX-130)+'px;right:'+(e.pageY-210)+'px;" id="assistantContent"><ul><li>查快递</li><li>查违章</li><li>查手机号码</li><li>查IP地址</li></ul></div>');
-		});
-		$(".assistant").mouseout(function(){
-			//$("#assistantContent").remove();
-		});
-	});
-		
-</script>
+<script src="${ctx}/js/jslib/jquery_2.1.3.js"></script>
+<script src="${ctx}/js/common.js"></script>
+<script src="${ctx}/js/file/file_list.js"></script>
 </head>
 <body>
 <%@include file="../include/ad.jsp" %>

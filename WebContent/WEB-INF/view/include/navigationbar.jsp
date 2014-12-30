@@ -4,7 +4,6 @@
 <ul>
 	<li><a href="${ctx}/homepage/index.html">我的主页</a></li>
 	<li><a>快乐驿站</a></li>
-	<li><a>新闻频道</a></li>
 	<li><a>历史上的今天</a></li>
 	<li><a>我的咖啡屋</a></li>
 	<li><a href="${ctx}/file/index.html">资源共享</a></li>

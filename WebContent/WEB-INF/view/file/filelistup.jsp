@@ -5,10 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>资源共享</title>
 <link rel="stylesheet" href="${ctx}/css/main.css">
- <script src="${ctx}/js/jquery_2.1.3.js"></script>
-<script type="text/javascript">
-
-</script>
+ <script src="${ctx}/js/jslib/jquery_2.1.3.js"></script>
+ <script src="${ctx}/js/common.js"></script>
 </head>
 <body>
 <!-- 广告侧边栏 -->

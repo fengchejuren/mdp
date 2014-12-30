@@ -6,23 +6,7 @@
 <title>这个是一个登录测试</title>
 <link rel="stylesheet" href="${ctx}/css/main.css">
  <script src="${ctx}/js/jquery_2.1.3.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(".sidebar_content").click(function(){
-				window.open("js1.html");	
-		});
-		$(".sidebar_close_icon").click(function(){
-			$(this).parent().remove();	
-		});
-		$(".assistant").mouseover(function(e){
-			$(this).after('<div style="background:#ccc;position:absolute;left:'+(e.pageX-130)+'px;right:'+(e.pageY-210)+'px;" id="assistantContent"><ul><li>查快递</li><li>查违章</li><li>查手机号码</li><li>查IP地址</li></ul></div>');
-		});
-		$(".assistant").mouseout(function(){
-			//$("#assistantContent").remove();
-		});
-	});
-		
-</script>
+ <script src="${ctx}/js/common.js"></script>
 </head>
 <body>
 <!-- 广告栏 -->
