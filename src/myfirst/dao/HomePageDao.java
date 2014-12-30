@@ -41,7 +41,7 @@ public class HomePageDao extends BaseDAO {
 	@Scheduled(cron="0 0 5,16 * * ?")	//每天凌晨5点钟，下午4点钟进行一次抓取
 	public void updateFileList() {
 		Date begin = new  Date();
-		logger.info("slf4j日志记录进行了一次抓取，开始时间是："+begin.toString());
+		logger.debug("开始抓取新闻记录，开始时间是："+begin.toString());
 		for(CrawlerVO crawlerVO:CrawlerUtil.crawlerVOs){
 			CrawlerVO vo = new  CrawlerVO();
 			BeanUtils.copyProperties(crawlerVO, vo);
@@ -51,7 +51,7 @@ public class HomePageDao extends BaseDAO {
 		CrawlerUtil.downloadFile(CrawlerUtil.CRAWLER_163_URL);
 		CrawlerUtil.downloadFile(CrawlerUtil.CRAWLER_SINA_URL);
 		Date end = new Date();
-		logger.info("进行了一次抓取，结束时间是："+end.toString()+". 花费时间是"+(end.getTime()-begin.getTime()));
+		logger.debug("进行了一次抓取，结束时间是："+end.toString()+"。 花费时间是"+(end.getTime()-begin.getTime())+"毫秒，共抓取了"+CrawlerUtil.crawlerVOs.size()+"条记录。");
 		tempList.clear();
 	}
 
