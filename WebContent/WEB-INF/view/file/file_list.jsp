@@ -5,9 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>资源共享</title>
 <link rel="stylesheet" href="${ctx}/css/main.css">
-<script src="${ctx}/js/jslib/jquery_2.1.3.js"></script>
+<script src="${ctx}/js/jquery_2.1.3.js"></script>
 <script src="${ctx}/js/common.js"></script>
-<script src="${ctx}/js/file/file_list.js"></script>
 </head>
 <body>
 <%@include file="../include/ad.jsp" %>
