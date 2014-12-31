@@ -43,6 +43,11 @@ public class CrawlerUtil {
 	 * 网易网址
 	 */
 	public final static String CRAWLER_163_URL = "http://www.163.com";
+
+	/**
+	 * 显示在页面上 的新闻条数
+	 */
+	public static final int NEWSNUMBER = 7;
 	
 	/**
 	 * 抓取的内容放进一个List里面

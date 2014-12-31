@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  * @see ~!^ Keep bugs away and code with U!	 
  */
 @Service   //将userService标注为一个服务层的bean
-public class UserService extends BaseService {
+public class LoginService extends BaseService {
 
 	@Autowired
 	private UserDao userDao;

@@ -26,7 +26,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class TestUserService extends BaseService {
 
 	@Autowired
-	private UserService userService;
+	private LoginService userService;
 	
 	@Test
 	public void hasMatchUser() {

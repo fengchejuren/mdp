@@ -63,11 +63,13 @@ public class HomePageDao extends BaseDAO {
 		List<CrawlerVO> list = new ArrayList<CrawlerVO>();
 		Random random = new Random();
 		if (!CrawlerUtil.crawlerVOs.isEmpty()) {
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < CrawlerUtil.NEWSNUMBER; i++) {
 				CrawlerVO crawlerVO = CrawlerUtil.crawlerVOs.get(random
 						.nextInt(CrawlerUtil.crawlerVOs.size()));
 				if (!list.contains(crawlerVO)) {
 					list.add(crawlerVO);
+				}else {			//排除掉重复的记录
+					i--;
 				}
 			}
 		}
