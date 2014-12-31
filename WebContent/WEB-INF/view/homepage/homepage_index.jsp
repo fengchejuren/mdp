@@ -38,10 +38,8 @@ function getwebsitebyCookie(){
 function refreshnews(){
 	$.ajax({
 		type:"get",
-		url:"${ctx}/homepage/getAjaxNews.html",
-		dataType:"html",
-		success:function(data){
-			var result = eval("("+data+")");
+		url:"${ctx}/homepage/getAjaxNews.html?temp="+new Date().getTime(),
+		success:function(result){
 			var htmlStr = '<ul class="homepage_news_list">';
 			for(var i=0;i<result.length;i++){
 				htmlStr += '<li style="float: none;"><a href="'+result[i].url+'" target="_blank">'+result[i].title+'</a><br></li>';
