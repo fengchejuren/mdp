@@ -28,16 +28,23 @@ public class TestUserService extends BaseService {
 	@Autowired
 	private LoginService userService;
 	
-	@Test
-	public void hasMatchUser() {
-		boolean b1 = userService.hasMatchUser("xiaoming", "xiao");
-		boolean b2 = userService.hasMatchUser("xiaoming", "xiaoM");
-		System.out.println(b2);
-	}
+//	@Test
+//	public void hasMatchUser() {
+//		boolean b1 = userService.hasMatchUser("xiaoming", "xiao");
+//		boolean b2 = userService.hasMatchUser("xiaoming", "xiaoM");
+//		System.out.println(b2);
+//	}
 
 	@Test
 	public void findUserByName(){
-		User user = userService.findUserByUserName("xiaoming");
-		System.out.println(user.getUserName()+"  "+user.getId());
+		User user = userService.findUserById(3);
+		System.out.println(user.getUsername()+"  "+user.getId());
+	}
+	
+	@Test
+	public void testDelete(){
+		User user = new User();
+		user.setId(2);
+		userService.delete(user);
 	}
 }

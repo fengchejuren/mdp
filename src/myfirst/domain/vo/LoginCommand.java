@@ -15,19 +15,19 @@ package myfirst.domain.vo;
 
 public class LoginCommand {
 
-	private String userName;
+	private String username;
 	private String password;
 	/**
 	 * @return the userName
 	 */
 	public String getUserName() {
-		return userName;
+		return username;
 	}
 	/**
 	 * @param userName the userName to set
 	 */
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.username = userName;
 	}
 	/**
 	 * @return the password

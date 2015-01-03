@@ -36,19 +36,22 @@ public class LoginController extends BaseController {
 		return "login/login_index";
 	}
 
+	/**用户登录检查 
+	 * returns:ModelAndView  
+	 * @see any changes please send mail to:superman166@126.com  
+	 * ~!^ keep bugs away and code of god with u!	
+	 */
 	@RequestMapping(value = "/logincheck.html")
 	public ModelAndView loginCheck(HttpServletRequest request,
-			LoginCommand loginCommand) {
-		boolean isvalideUser = loginService.hasMatchUser(
-				loginCommand.getUserName(), loginCommand.getPassword());
-		if (!isvalideUser)
-			return new ModelAndView("login", "error", "用户名或密码错误");
-		else {
-			User user = loginService.findUserByUserName(loginCommand
-					.getUserName());
-			request.getSession().setAttribute("user", user);
-			return new ModelAndView("main");
-		}
-
+			User user) {
+		User user2 = loginService.findUserById(2);
+		User user3 = new User();
+		user3.setUsername("明明");
+		user3.setPassword("1234");
+		user3.setEmail("32k@dfd.sdf");
+		user2.setEmail("hello@124.com");
+		loginService.save(user2);
+		//loginService.delete(user2);
+		return null;
 	}
 }

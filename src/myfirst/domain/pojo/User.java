@@ -10,6 +10,13 @@ package myfirst.domain.pojo;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import myfirst.base.BasePOJO;
 
 /** 
@@ -17,86 +24,148 @@ import myfirst.base.BasePOJO;
  * @author Rock King 2014年12月17日 下午11:36:33 
  * @see ~!^ Keep bugs away and code with U!	 
  */
-
+@Entity
+@Table(name="mdp_user")
 public class User extends BasePOJO implements Serializable {
 
-	private int id;
-	private String userName;
-	private String pwd;
-	private int credits;
-	private String last_ip;
-	private Date last_visit;
+	private static final long serialVersionUID = -6310809110591119027L;
+	
 	/**
-	 * @return the id
+	 * @Fields id : 用户id
 	 */
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	/**
+	 * @Fields username :用户名
+	 */
+	@Column
+	private String username;
+	
+	/**
+	 * @Fields password : 密码
+	 */
+	@Column
+	private String password;
+	
+	/**
+	 * @Fields email : 用户邮箱
+	 */
+	@Column
+	private String email;
+	
+	/**
+	 * @Fields registerDate :注册时间
+	 */
+	private Date registerTime;
+	/**
+	 * @Fields credits : 用户积分
+	 */
+	private int credits;
+	/**
+	 * @Fields last_ip : 上次登录ip
+	 */
+	private String lastVisitIp;
+	/**
+	 * @Fields last_visit :上次登录时间
+	 */
+	private Date lastVisitTime;
+	/*** @return the id*/
+	
 	public int getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
+	
 	public void setId(int id) {
 		this.id = id;
 	}
-	/**
-	 * @return the userName
-	 */
-	public String getUserName() {
-		return userName;
+	/*** @return the username*/
+	
+	public String getUsername() {
+		return username;
 	}
 	/**
-	 * @param userName the userName to set
+	 * @param username the username to set
 	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	/*** @return the password*/
+	
+	public String getPassword() {
+		return password;
 	}
 	/**
-	 * @return the pwd
+	 * @param password the password to set
 	 */
-	public String getPwd() {
-		return pwd;
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	/*** @return the email*/
+	
+	public String getEmail() {
+		return email;
 	}
 	/**
-	 * @param pwd the pwd to set
+	 * @param email the email to set
 	 */
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	/**
-	 * @return the credits
-	 */
+	/*** @return the credits*/
+	
 	public int getCredits() {
 		return credits;
 	}
 	/**
 	 * @param credits the credits to set
 	 */
+	
 	public void setCredits(int credits) {
 		this.credits = credits;
 	}
-	/**
-	 * @return the last_ip
-	 */
-	public String getLast_ip() {
-		return last_ip;
+
+	/*** @return the lastVisitIp*/
+	
+	public String getLastVisitIp() {
+		return lastVisitIp;
 	}
 	/**
-	 * @param last_ip the last_ip to set
+	 * @param lastVisitIp the lastVisitIp to set
 	 */
-	public void setLast_ip(String last_ip) {
-		this.last_ip = last_ip;
+	
+	public void setLastVisitIp(String lastVisitIp) {
+		this.lastVisitIp = lastVisitIp;
+	}
+	/*** @return the lastVisitTime*/
+	
+	public Date getLastVisitTime() {
+		return lastVisitTime;
 	}
 	/**
-	 * @return the last_visit
+	 * @param lastVisitTime the lastVisitTime to set
 	 */
-	public Date getLast_visit() {
-		return last_visit;
+	
+	public void setLastVisitTime(Date lastVisitTime) {
+		this.lastVisitTime = lastVisitTime;
+	}
+	/*** @return the registerTime*/
+	
+	public Date getRegisterTime() {
+		return registerTime;
 	}
 	/**
-	 * @param last_visit the last_visit to set
+	 * @param registerTime the registerTime to set
 	 */
-	public void setLast_visit(Date last_visit) {
-		this.last_visit = last_visit;
+	
+	public void setRegisterTime(Date registerTime) {
+		this.registerTime = registerTime;
 	}
 	
 }

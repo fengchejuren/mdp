@@ -8,7 +8,7 @@
 package myfirst.service;
 
 import myfirst.base.BaseService;
-import myfirst.dao.UserDao;
+import myfirst.dao.LoginDao;
 import myfirst.domain.pojo.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,18 @@ import org.springframework.stereotype.Service;
 public class LoginService extends BaseService {
 
 	@Autowired
-	private UserDao userDao;
+	private LoginDao loginDao;
+
 	
-	public boolean hasMatchUser(String userName,String password){
-		return userDao.getMatchCount(userName, password)>0;
+	public User findUserById(int id){
+		return loginDao.findUserById(id);
 	}
 	
-	public User findUserByUserName(String userName){
-		return userDao.findUserByUserName(userName);
+	public void delete(User user){
+		loginDao.delete(user);
+	}
+	
+	public void save(User user){
+		loginDao.save(user);
 	}
 }
