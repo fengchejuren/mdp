@@ -37,14 +37,15 @@ public class TestUserService extends BaseService {
 
 	@Test
 	public void findUserByName(){
-		User user = userService.findUserById(3);
-		System.out.println(user.getUsername()+"  "+user.getId());
+		User user = userService.findUserById(4);
+		System.out.println(user.getUsername()+"  "+user.getId()+"-----------------------------------------------------");
 	}
 	
 	@Test
 	public void testDelete(){
 		User user = new User();
-		user.setId(2);
+		user.setId(4);
+		logger.debug("开始执行删除操作。。。。。。。。。。。。。。。。。。。。。。。");
 		userService.delete(user);
 	}
 }

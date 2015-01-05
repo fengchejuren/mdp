@@ -1,12 +1,9 @@
 package myfirst.base;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 
 import org.apache.log4j.Logger;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class BaseDAO  {
 

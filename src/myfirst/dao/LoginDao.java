@@ -27,6 +27,6 @@ public class LoginDao extends BaseDAO {
 	}
 	
 	public void delete(User user){
-		entityManager.remove(user);
+		entityManager.remove(entityManager.getReference(User.class, user.getId()));
 	}
 }

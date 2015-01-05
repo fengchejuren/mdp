@@ -28,6 +28,7 @@
 	<context:annotation-config />
 	<context:component-scan base-package="myfirst.dao" />  <!-- 自动扫描所有注解该路径 -->
 	<context:component-scan base-package="myfirst.service"></context:component-scan>
+	<context:component-scan base-package="myfirst.domain.pojo"></context:component-scan>
 	
 	<!-- 这个bean没有什么用处,是用来测试spring 通过xml配置文件获取bean的方法 myfirst.test.BeanFactory -->
 	<bean id="loginCommand" class="myfirst.domain.vo.LoginCommand">
@@ -145,7 +146,19 @@
     <!-- 配置Spring Data JPA扫描目录 
     <jpa:repositories base-package="myfirst.domain.pojo"/>
 --> 
-              
+    <tx:advice id="mytx"> 
+     <tx:attributes> 
+         <tx:method name="add*"    propagation="REQUIRED" /> 
+         <tx:method name="del*"    propagation="REQUIRED" /> 
+         <tx:method name="update*" propagation="REQUIRED" isolation="DEFAULT"/> 
+         <tx:method name="*"       propagation="SUPPORTS" read-only="true"/> 
+     </tx:attributes> 
+</tx:advice> 
+
+    <!-- 织入 --> 
+    <aop:config> 
+       <aop:advisor advice-ref="mytx" pointcut="execution(* myfirst.service.*.*(..) )"/> 
+    </aop:config>	          
 
 	<!-- 定时器，抓取网页新闻时用到 -->
 	<task:scheduler id="scheduler" pool-size="10"/>
