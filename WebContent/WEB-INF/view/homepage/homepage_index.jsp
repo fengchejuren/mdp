@@ -90,11 +90,14 @@ function refreshnews(){
 	<li><a href="http://www.qq.com/" target="_blank">腾讯首页</a></li>
 </ul>
 <div style="clear: both;"></div>
+<div class="dividing_line"></div>
 <h3><a href="${ctx}/homepage/myfavoritewebsite.html">我的网站<font color="#7F8D8A" size="0.9em">---戳一下,把自己喜欢的网站放上去</font></a></h3>
 <ul id="mysite"></ul>
 <div style="clear:both;"></div>
+<div class="dividing_line"></div>
 <!-- 新闻抓取 -->
-<h3>新闻天下 <img src="${ctx}/images/btn/refresh_icon.png" style="float:right;" id="refresh_news" alt="刷新" title="刷新"/></h3>
+<h3>新闻天下 <img src="${ctx}/images/btn/refresh_icon.png" class="icon_img" style="float:right;margin-right:30px;" id="refresh_news" alt="刷新" title="刷新"/></h3>
+<div class="dividing_line"></div>
 <div id="news_content">
 	<ul class="homepage_news_list">
 	<c:forEach items="${crawlerVOList}" var="crawler">

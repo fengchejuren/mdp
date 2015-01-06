@@ -29,7 +29,7 @@ $("#login_form").form({
 <!-- 导航栏 -->
 <%@include file="../include/navigationbar.jsp" %>
 <div class="login_loginui">
-<form class="login_form" action="${ctx}/login/logincheck.html" id="login_form" method="post">
+<form class="login_form" action="${ctx}/login/registerCheck.html" id="login_form" method="post">
 <table class="input_form_table">
 	<tr>
 		<td class="left">用户名：</td>
