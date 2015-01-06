@@ -16,39 +16,18 @@ import org.jsoup.select.Elements;
 
 import myfirst.domain.vo.CrawlerVO;
 
+import static myfirst.utils.ConstantUtil.CRAWLER_163_CONTENTID;
+import static myfirst.utils.ConstantUtil.CRAWLER_163_URL;
+import static myfirst.utils.ConstantUtil.CRAWLER_SINA_CONTENTID;
+import static myfirst.utils.ConstantUtil.CRAWLER_SINA_URL;
+
 /**
  * 网络爬虫工具
  * 
  * @author Administrator
  *
  */
-public class CrawlerUtil {
-
-	/**
-	 * 新浪网抓取内容的id
-	 */
-	public final static String CRAWLER_SINA_CONTENTID = "xy-impcon-A";
-
-	/**
-	 * 新浪网址
-	 */
-	public final static String CRAWLER_SINA_URL = "http://www.sina.com";
-	
-	/**
-	 *网易抓取内容的id 
-	 */
-	public final static String CRAWLER_163_CONTENTID = "layout-news";
-
-	/**
-	 * 网易网址
-	 */
-	public final static String CRAWLER_163_URL = "http://www.163.com";
-
-	/**
-	 * 显示在页面上 的新闻条数
-	 */
-	public static final int NEWSNUMBER = 7;
-	
+public class CrawlerUtil {	
 	/**
 	 * 抓取的内容放进一个List里面
 	 */

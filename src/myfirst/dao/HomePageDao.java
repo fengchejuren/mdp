@@ -14,6 +14,7 @@ import java.util.Random;
 
 import myfirst.base.BaseDAO;
 import myfirst.domain.vo.CrawlerVO;
+import myfirst.utils.ConstantUtil;
 import myfirst.utils.CrawlerUtil;
 
 import org.springframework.beans.BeanUtils;
@@ -48,8 +49,8 @@ public class HomePageDao extends BaseDAO {
 			tempList.add(vo);
 		}
 		CrawlerUtil.crawlerVOs.clear();
-		CrawlerUtil.downloadFile(CrawlerUtil.CRAWLER_163_URL);
-		CrawlerUtil.downloadFile(CrawlerUtil.CRAWLER_SINA_URL);
+		CrawlerUtil.downloadFile(ConstantUtil.CRAWLER_163_URL);
+		CrawlerUtil.downloadFile(ConstantUtil.CRAWLER_SINA_URL);
 		Date end = new Date();
 		logger.debug("进行了一次抓取，结束时间是："+end.toString()+"。 花费时间是"+(end.getTime()-begin.getTime())+"毫秒，共抓取了"+CrawlerUtil.crawlerVOs.size()+"条记录。");
 		tempList.clear();
@@ -63,7 +64,7 @@ public class HomePageDao extends BaseDAO {
 		List<CrawlerVO> list = new ArrayList<CrawlerVO>();
 		Random random = new Random();
 		if (!CrawlerUtil.crawlerVOs.isEmpty()) {
-			for (int i = 0; i < CrawlerUtil.NEWSNUMBER; i++) {
+			for (int i = 0; i < ConstantUtil.NEWSNUMBER; i++) {
 				CrawlerVO crawlerVO = CrawlerUtil.crawlerVOs.get(random
 						.nextInt(CrawlerUtil.crawlerVOs.size()));
 				if (!list.contains(crawlerVO)) {
