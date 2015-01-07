@@ -60,13 +60,17 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value="/doAddRegisterInfo.html")
-	public ModelAndView doAddRegisterInfo(HttpServletRequest request){
+	public ModelAndView doAddRegisterInfo(HttpServletRequest request) throws Exception{
 		String info = request.getParameter("info");
 		logger.debug(info);
-		return new ModelAndView();
+		User user = loginService.doAddRegisterInfo(info);
+		if(user == null){
+			throw new Exception();
+		}
+		return new ModelAndView("login/fillinginfo")
+						.addObject("user",user);
 	}
 	/**用户登录检查 
-	 * returns:ModelAndView  
 	 * @see any changes please send mail to:superman166@126.com  
 	 * ~!^ keep bugs away and code of god with u!	
 	 */

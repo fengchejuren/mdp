@@ -43,6 +43,16 @@ public class ConstantUtil {
 	 * 邮箱服务器的host
 	 */
 	public static final String EMAIL_FROM_HOST = "smtp.126.com";
+
+	/**
+	 * 保存我的网站时储存的cookies名称
+	 */
+	public static final String WEBSITECOOKIENAME = "siteinfocookie";
+
+	/**
+	 * 注册时邮箱验证的有效期（毫秒）
+	 */
+	public static final long DIVIDED_TIME = 10*60*1000*6*24;
 	
 	
 }

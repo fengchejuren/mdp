@@ -1,5 +1,5 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page language="java" import="myfirst.utils.CookiesUtil" %>
+<%@page language="java" import="myfirst.utils.ConstantUtil" %>
 <%@include file="../include/head.jsp" %>
 <html>
 <head>
@@ -26,7 +26,7 @@ function getwebsitebyCookie(){
 	var htmlStr = '';
 	for(var i=0;i<cookieObj.length;i++){
 		var arr = cookieObj[i].split("=");
-		if("<%=CookiesUtil.WEBSITECOOKIENAME%>" == arr[0]){
+		if("<%=ConstantUtil.WEBSITECOOKIENAME%>" == arr[0]){
 			var cookieinfo = decodeURI(arr[1]).split("|");
 			for(var i=0;i<cookieinfo.length;i=i+2){		
 				htmlStr += '<div class="websiteItem">网站名称：<input name="sitename" value="'+cookieinfo[i]+'" class="sitename" '
@@ -54,7 +54,7 @@ function addCookie(data){
 	data = encodeURI(data);
 	var now = new Date();
 	now.setDate(now.getDate()+180);	//cookies过期日期为180天
-	var str = "<%=CookiesUtil.WEBSITECOOKIENAME%>="+data+";expires="+now.toGMTString();
+	var str = "<%=ConstantUtil.WEBSITECOOKIENAME%>="+data+";expires="+now.toGMTString();
 	document.cookie = str;
 }
 //增加网址输入框

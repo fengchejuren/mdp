@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import myfirst.base.BaseService;
 import myfirst.dao.HomePageDao;
 import myfirst.domain.vo.CrawlerVO;
+import myfirst.utils.ConstantUtil;
 import myfirst.utils.CookiesUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class HomePageService extends BaseService {
 	public List<Map<String, String>> getWebSiteByCookie(HttpServletRequest request){
 		List<Map<String, String>> websiteListList = new ArrayList<Map<String,String>>();
 		try {
-			Cookie cookie = CookiesUtil.getCookieByCookieName(request, CookiesUtil.WEBSITECOOKIENAME);
+			Cookie cookie = CookiesUtil.getCookieByCookieName(request, ConstantUtil.WEBSITECOOKIENAME);
 			if(cookie != null){
 				String siteInfoString = cookie.getValue();
 				siteInfoString = URLDecoder.decode(siteInfoString, "UTF-8");	//因为可能有中文，转码

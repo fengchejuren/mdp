@@ -7,16 +7,18 @@
  */
 package myfirst.service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 import myfirst.base.BaseService;
 import myfirst.dao.LoginDao;
 import myfirst.domain.pojo.User;
-import myfirst.utils.Base64Util;
+import myfirst.exception.BusinessException;
+import myfirst.utils.ConstantUtil;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * @Description: TODO
@@ -43,13 +45,33 @@ public class LoginService extends BaseService {
 	}
 
 	/**
-	 * 对用户传过来的注册信息进行加密
+	 * 对用户传过来的注册信息进行加密,并发送验证邮件
 	 * 
 	 * @param user
 	 * @return
 	 */
-	public String sendRegisterCheckInfoMail(User user) {
+	public void sendRegisterCheckInfoMail(User user) {
 		loginDao.sendRegisterCheckInfoMail(user);
-		return null;
+	}
+
+	/**解析用户获取的信息传递过来的链接信息，并将注册信息保存进数据库
+	 * 操作成功，返回0，失败返回1
+	 * @param info
+	 */
+	public User doAddRegisterInfo(String info) {
+			byte[] bytes = Base64.decodeBase64(info);
+			User user = null;
+			String str = new String(bytes);
+			String[] strInfo = str.split("\\|");
+			long now = new  Date().getTime();
+			if(strInfo.length!=3 || now-Long.valueOf(strInfo[2])>ConstantUtil.DIVIDED_TIME);
+//				throw new BusinessException("此链接已经过期或者不是正常的链接，你可以用相同的邮箱重新注册！");
+			user = new User();
+			user.setUsername(strInfo[0]);
+			user.setPassword(strInfo[1]);
+			user.setEmail(strInfo[2]);
+			user.setRegisterTime(new Date());
+			//TODO 此处进行写入数据库的保存操作
+			return user;
 	}
 }

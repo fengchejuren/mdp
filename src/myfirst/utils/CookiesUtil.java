@@ -15,11 +15,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CookiesUtil {
 
-	/**
-	 * 保存我的网站时储存的cookies名称
-	 */
-	public static final String WEBSITECOOKIENAME = "siteinfocookie";
-
 	/**新增一个cookie
 	 * @param response
 	 * @param name
