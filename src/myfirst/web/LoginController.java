@@ -49,10 +49,10 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/registerCheck.html")
-	public String registerPage(User user){
-		logger.debug("用户注册输入参数"+user.getEmail()+user.getUsername()+user.getPassword());
+	public ModelAndView registerPage(User user){
 		loginService.sendRegisterCheckInfoMail(user);
-		return "login/register";
+		return new ModelAndView("login/loadEmailPage")
+						.addObject("user",user);
 	}
 
 	/**保存用户的注册信息
@@ -67,9 +67,10 @@ public class LoginController extends BaseController {
 		if(user == null){
 			throw new Exception();
 		}
-		return new ModelAndView("login/fillinginfo")
-						.addObject("user",user);
+		request.getSession().setAttribute("user", user);
+		return new ModelAndView("login/fillinginfo");
 	}
+	
 	/**用户登录检查 
 	 * @see any changes please send mail to:superman166@126.com  
 	 * ~!^ keep bugs away and code of god with u!	

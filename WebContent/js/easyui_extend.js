@@ -152,12 +152,14 @@ $.extend($.fn.validatebox.defaults.rules, {
 );
 
 function validation(){
+	var flag = true;
 	$(".ui_form input").each(function(){
 		if ($(this).attr('required')|| $(this).attr('validType')) {
 			if(!$(this).validatebox('isValid'))
-				return false;
+				flag = false;
 		}
 	});
-	return true;
+	return flag;
 }
+
 		
