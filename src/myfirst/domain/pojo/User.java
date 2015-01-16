@@ -25,7 +25,7 @@ import myfirst.base.BasePOJO;
  * @see ~!^ Keep bugs away and code with U!
  */
 @Entity
-@Table(name = "mdp_user", catalog = "Stu_db2", schema = "dbo")
+@Table(name = "t_user", schema = "test")
 public class User extends BasePOJO implements Serializable {
 
 	private static final long serialVersionUID = -6310809110591119027L;

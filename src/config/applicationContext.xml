@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop" 
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:p="http://www.springframework.org/schema/p" 
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:cache="http://www.springframework.org/schema/cache"  
     xmlns:jpa="http://www.springframework.org/schema/data/jpa"
@@ -29,7 +29,7 @@
 	<context:component-scan base-package="myfirst.dao" />  <!-- 自动扫描所有注解该路径 -->
 	<context:component-scan base-package="myfirst.service"></context:component-scan>
 	<context:component-scan base-package="myfirst.domain.pojo"></context:component-scan>
-	
+	<aop:aspectj-autoproxy proxy-target-class="true"/> 
 	<!-- 这个bean没有什么用处,是用来测试spring 通过xml配置文件获取bean的方法 myfirst.test.BeanFactory -->
 	<bean id="loginCommand" class="myfirst.domain.vo.LoginCommand">
 		<property name="userName" value="llla"></property>
@@ -56,96 +56,55 @@
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-		<property name="url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=Stu_db2;" />
-		<property name="username" value="sa" />
-		<property name="password" value="sur0ckKingOa" />
+		<property name="driverClassName" value="org.gjt.mm.mysql.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
 	</bean>	
- 		
-<!-- 
-	<bean id="dataSource"
-    	class="org.logicalcobwebs.proxool.ProxoolDataSource">
-	    <property name="driver">
-	        <value>oracle.jdbc.driver.OracleDriver</value>
-	    </property>
-	    <property name="driverUrl">
-	        <value>jdbc:oracle:thin:@172.16.24.73:1521:orcl?user=ckb_ext&amp;password=ckb_extadmin</value>
-	    </property>
-	    <property name="user" value="ckb_ext" />
-	    <property name="password" value="ckb_extadmin" />
-	    <property name="alias" value="Pool_dbname" />
-	    <property name="prototypeCount" value="0" />
-	    <property name="maximumConnectionCount" value="50" />
-	    <property name="minimumConnectionCount" value="2" />
-	    <property name="simultaneousBuildThrottle" value="50" />
-	    <property name="houseKeepingSleepTime" value="90000" /> 
-	    <property name="maximumConnectionLifetime" value="14400000" />	
-	    <property name="houseKeepingTestSql" value="select CURRENT_DATE" />
-	</bean>
--->
-<!-- Dao的实现 
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	<aop:config proxy-target-class="true">
-		<aop:pointcut expression=" execution(* myfirst.service..*(..))" id="serviceMethod"/>
-		<aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
-	</aop:config>
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="*"/>
-		</tx:attributes>
-	</tx:advice>
--->
-
-	<!-- 用于指定持久化实现厂商类 -->
-       <bean id="persistenceProvider" class="org.hibernate.ejb.HibernatePersistence"/>
-       <!-- 用于设置JPA实现厂商的特定属性 -->
-       <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">  
-     <property name="database" value="SQL_SERVER"/>  
-    </bean>  
 
 	<!-- 定义实体管理器工厂 -->
      <bean id="entityManagerFactory" autowire="byName"
         class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-           <property name="persistenceProvider" ref="persistenceProvider"/>
-           <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>  
-      <property name="jpaDialect" ref="jpaDialect"/>  
+        	<property name="dataSource" ref="dataSource"/>
+            <property name="packagesToScan" value="myfirst.domain.pojo"/>
+            <property name="persistenceProvider" >
+            	<bean class="org.hibernate.ejb.HibernatePersistence"/> 
+            </property>	
+            <property name="jpaVendorAdapter">
+            	<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+            		<property name="generateDdl" value="false"></property>
+            		<property name="database" value="MYSQL"/>
+                	<property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+                	<property name="showSql" value="true"/> 
+            	</bean>
+            </property>  
+      		<property name="jpaDialect">
+            	<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+        	</property> 
            
-           <property name="packagesToScan" value="myfirst.domain.pojo"/>
-           
-           <property name="jpaProperties">
-            <props>
-             <prop key="hibernate.dialect">org.hibernate.dialect.SQLServer2008Dialect</prop>
-             <prop key="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</prop>
-             <prop key="hibernate.max_fetch_depth">3</prop>
-             <prop key="hibernate.jdbc.fetch_size">18</prop>
-             <prop key="hibernate.jdbc.batch_size">10</prop>
-             <prop key="hibernate.hbm2ddl.auto">update</prop>
-             <prop key="hibernate.show_sql">true</prop>
-             <prop key="hibernate.format_sql">true</prop>
-             <prop key="javax.persistence.validation.mode">none</prop>
-            </props>
+            <property name="jpaPropertyMap">
+            	<map>
+                <entry key="hibernate.query.substitutions" value="true 1, false 0"/>
+                <entry key="hibernate.default_batch_fetch_size" value="16"/>
+                <entry key="hibernate.max_fetch_depth" value="2"/>
+                <entry key="hibernate.generate_statistics" value="true"/>
+                <entry key="hibernate.bytecode.use_reflection_optimizer" value="true"/>
+                <entry key="hibernate.cache.use_second_level_cache" value="false"/>
+                <entry key="hibernate.cache.use_query_cache" value="false"/>
+            </map> 
            </property>
-    </bean>
-     <!-- 用于指定一些高级特性 -->
-    <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>  
+    </bean> 
     <!-- 配置事务管理器 -->  
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">  
      	<property name="entityManagerFactory" ref="entityManagerFactory" />  
     </bean> 
     <!-- 启用 annotation事务--> 
-    <tx:annotation-driven transaction-manager="transactionManager"/> 
-    
-    <!-- 配置Spring Data JPA扫描目录 
-    <jpa:repositories base-package="myfirst.domain.pojo"/>
---> 
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/> 
+    <jpa:repositories base-package="myfirst.repository" 
+    		repository-impl-postfix="Impl"
+            entity-manager-factory-ref="entityManagerFactory"
+            transaction-manager-ref="transactionManager">
+    </jpa:repositories>    
     <tx:advice id="mytx"> 
      <tx:attributes> 
          <tx:method name="add*"    propagation="REQUIRED" /> 
@@ -153,7 +112,7 @@
          <tx:method name="update*" propagation="REQUIRED" isolation="DEFAULT"/> 
          <tx:method name="*"       propagation="SUPPORTS" read-only="true"/> 
      </tx:attributes> 
-</tx:advice> 
+	</tx:advice> 
 
     <!-- 织入 --> 
     <aop:config> 

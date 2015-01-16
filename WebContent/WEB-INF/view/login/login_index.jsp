@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>用户注册</title>
+<title>用户登陆</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/css/main.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/js/easyui/themes/default/easyui.css">
 <script src="${ctx}/js/jquery_2.1.3.js"></script>
@@ -30,23 +30,19 @@ $("#login_form").form({
 <%@include file="../include/navigationbar.jsp" %>
 <div class="login_loginui">
 <form class="login_form" action="${ctx}/login/logincheck.html" id="login_form" method="post">
-<table class="input_form_table">
-	<tr>
-		<td class="left">用户名：</td>
-		<td class="right"><input type="text" name="username" class="input easyui-validatebox" missingMessage="请输入用户名"  required="required" /></td>
-	</tr>
-	<tr>
-		<td class="left">密码：</td>
-		<td class="right"><input type="password" name="password" class="input easyui-validatebox" required="required" missingMessage="请输入密码" /></td>
-	</tr>
-	<tr>
-		<td class="left">常用邮箱：</td>
-		<td class="right"><input type="email" name="email" class="input easyui-validatebox" required="required" validType="email" missingMessage="请输入邮箱地址" invalidMessage="你输入的邮箱不合法" /></td>
-	</tr>
-	<tr>
-		<td colspan="2" style="text-align: right;"><input type="submit" class="submit_but" id="submit" value="登陆"></td>
-	</tr>
-</table>
+	<table class="input_form_table">
+		<tr>
+			<td class="left">用户名/邮箱：</td>
+			<td class="right"><input type="text" name="username" class="input easyui-validatebox" missingMessage="请输入用户名"  required="required" /></td>
+		</tr>
+		<tr>
+			<td class="left">密码：</td>
+			<td class="right"><input type="password" name="password" class="input easyui-validatebox" required="required" missingMessage="请输入密码" /></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: right;"><input type="submit" class="submit_but" id="submit" value="登陆"></td>
+		</tr>
+	</table>
 </form>	
 </div>
 </div>

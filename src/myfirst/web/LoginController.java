@@ -7,11 +7,14 @@
  */
 package myfirst.web;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import myfirst.base.BaseController;
 import myfirst.domain.pojo.User;
-import myfirst.service.LoginService;
+import myfirst.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController extends BaseController {
 
 	@Autowired
-	private LoginService loginService;
+	private UserService userService;
 
 	/**登陆主页
 	 * @return
@@ -45,14 +48,15 @@ public class LoginController extends BaseController {
 	public String registerPage(){
 		return "login/register";
 	}
-	/**注册时向用户的邮箱发送邮件进行验证
+	
+	/**保存用户
 	 * @return
 	 */
-	@RequestMapping(value = "/registerCheck.html")
+	@RequestMapping(value = "/doregister.html")
 	public ModelAndView registerPage(User user){
-		loginService.sendRegisterCheckInfoMail(user);
-		return new ModelAndView("login/loadEmailPage")
-						.addObject("user",user);
+		user.setRegisterTime(new Date());
+		//userService.doSave(user);
+		return new ModelAndView("login/success");
 	}
 
 	/**保存用户的注册信息
@@ -63,7 +67,7 @@ public class LoginController extends BaseController {
 	public ModelAndView doAddRegisterInfo(HttpServletRequest request) throws Exception{
 		String info = request.getParameter("info");
 		logger.debug(info);
-		User user = loginService.doAddRegisterInfo(info);
+		User user = userService.doAddRegisterInfo(info);
 		if(user == null){
 			throw new Exception();
 		}
@@ -71,20 +75,15 @@ public class LoginController extends BaseController {
 		return new ModelAndView("login/fillinginfo");
 	}
 	
-	/**用户登录检查 
+	/**用户登录
 	 * @see any changes please send mail to:superman166@126.com  
 	 * ~!^ keep bugs away and code of god with u!	
 	 */
 	@RequestMapping(value = "/logincheck.html")
 	public ModelAndView loginCheck(HttpServletRequest request,
 			User user) {
-		User user2 = loginService.findUserById(2);
-		User user3 = new User();
-		user3.setUsername("明明");
-		user3.setPassword("1234");
-		user3.setEmail("32k@dfd.sdf");
-		user2.setEmail("hello@124.com");
-		loginService.save(user2);
+		String username = user.getUsername();
+		List<User> list = userService.findByUsername(username);
 		//loginService.delete(user2);
 		return null;
 	}

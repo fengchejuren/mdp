@@ -210,7 +210,7 @@ ul, ul li {
 }
 
 .input_form_table .left {
-	width: 100px;
+	width: 120px;
 	height: 36px;
 	text-align: right;
 }
@@ -221,5 +221,36 @@ ul, ul li {
 
 .input_form_table .submit_but {
 	margin-right:20px;	
+}
+
+.register_success {
+	color:#5c5c5c;
+	font-size: 14px;
+	font-weight: bold;
+}
+.register_success ul li {
+	float: none;
+	font-size: 10px;
+	font-weight: normal;
+	background-image: url(../images/btn/questionMark.png);
+	width: 135px;
+	background-repeat: no-repeat;
+	background-position: right;
+	background-size: 15px 15px;
+	cursor: pointer;
+	text-decoration: underline;
+}
+.register_link a {
+	margin-left: 50px;
+	font-size: 10px;
+	color: #6bbb5b;
+}
+.register_message {
+	border: 2px solid #ccc;
+	background-color: #FFF;
+	width: 200px;
+	height: 90px; 
+	margin-left: 200px;
+	display: none;
 }
 /***用户登陆结束***/

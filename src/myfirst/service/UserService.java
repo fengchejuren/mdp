@@ -1,42 +1,50 @@
-/**  
- * @Title: UserDao.java 
- * @Package myfirst.dao 
- * @Description: TODO 
- * @author Rock King 2014年12月18日 上午12:01:29
- * @version V1.0  
- */
-package myfirst.dao;
+package myfirst.service;
 
 import java.util.Date;
+import java.util.List;
 
-import myfirst.base.BaseDAO;
+import myfirst.base.BaseService;
 import myfirst.domain.pojo.User;
+import myfirst.exception.BusinessException;
+import myfirst.repository.UserRepository;
+import myfirst.utils.ConstantUtil;
 import myfirst.utils.MailUtil;
 
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @Description: TODO
- * @author Rock King 2014年12月18日 上午12:01:29
- * @see ~!^ Keep bugs away and code with U!
- */
-@Repository
-// 通过spring注解定义一个dao,与Service的区别是对异常的封装
-public class LoginDao extends BaseDAO {
+@Service
+@Transactional
+public class UserService extends BaseService<User, Integer> {
 
-	public User findUserById(int id) {
-		User user = entityManager.find(User.class, id);
-		return user;
-	}
-
-	public void delete(User user) {
-		entityManager.remove(entityManager.getReference(User.class,
-				user.getId()));
+	@Autowired
+	private UserRepository userRepository;
+	/**解析用户获取的信息传递过来的链接信息，并将注册信息保存进数据库
+	 * 操作成功，返回0，失败返回1
+	 * @param info
+	 */
+	public User doAddRegisterInfo(String info) throws Exception{
+			byte[] bytes = Base64.decodeBase64(info);
+			User user = null;
+			String str = new String(bytes);
+			String[] strInfo = str.split("\\|");
+			long now = new  Date().getTime();
+			if(strInfo.length!=4 || now-Long.valueOf(strInfo[3])>ConstantUtil.DIVIDED_TIME){
+				throw new BusinessException("此链接已经过期，请您重新操作！");
+			}
+			user = new User();
+			user.setUsername(strInfo[0]);
+			user.setPassword(strInfo[1]);
+			user.setEmail(strInfo[2]);
+			user.setRegisterTime(new Date());
+			doSave(user);
+			return user;
 	}
 
 	/**
-	 * 用户注册时发送信息到用户的邮箱进行验证
+	 * 对用户传过来的注册信息进行Base64编码,并发送验证邮件
 	 * 
 	 * @param user
 	 */
@@ -57,5 +65,21 @@ public class LoginDao extends BaseDAO {
 		buffer.append("<div style='width:100%;border-bottom:1px solid #ccc;margin:10px 0;'>&nbsp;&nbsp;如果不是你本人操作，那么就忽略它吧！当然，也请你注意自己个人信息的保密，必要时请修改邮箱密码！");
 		buffer.append("</body></html");
 		MailUtil.sendMail(user.getEmail(), "这是来自我的地盘网站的注册验证邮件", buffer.toString());
+	}
+	
+	/**通过用户名查找用户
+	 * @param username
+	 * @return
+	 */
+	public List<User> findByUsername(String username){
+		return userRepository.findByUsername(username);
+	}
+	
+	/**通过邮箱查找用户
+	 * @param email
+	 * @return
+	 */
+	public List<User> findByEmail(String email){
+		return userRepository.findByEmail(email);
 	}
 }

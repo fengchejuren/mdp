@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import myfirst.dao.HomePageDao;
 import myfirst.domain.vo.CrawlerVO;
 import myfirst.utils.ConstantUtil;
 import myfirst.utils.CookiesUtil;
+import myfirst.utils.CrawlerUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,6 +68,19 @@ public class HomePageService extends BaseService {
 	 * ~!^ Keep bugs away and code with U!	
 	 */
 	public List<CrawlerVO> getCrawlerVOList() {
-		return homePageDao.getCrawlerVOList();
+		List<CrawlerVO> list = new ArrayList<CrawlerVO>();
+		Random random = new Random();
+		if (!CrawlerUtil.crawlerVOs.isEmpty()) {
+			for (int i = 0; i < ConstantUtil.NEWSNUMBER; i++) {
+				CrawlerVO crawlerVO = CrawlerUtil.crawlerVOs.get(random
+						.nextInt(CrawlerUtil.crawlerVOs.size()));
+				if (!list.contains(crawlerVO)) {
+					list.add(crawlerVO);
+				}else {			//排除掉重复的记录
+					i--;
+				}
+			}
+		}
+		return list;
 	}
 }

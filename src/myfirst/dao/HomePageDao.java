@@ -56,24 +56,4 @@ public class HomePageDao extends BaseDAO {
 		tempList.clear();
 	}
 
-	/**从CrawlerUtil.crawlerVOs中随机取5条记录
-	 * @see Any changes please send mail to:superman166@126.com  
-	 * ~!^ Keep bugs away and code with U!	
-	 */
-	public List<CrawlerVO> getCrawlerVOList() {
-		List<CrawlerVO> list = new ArrayList<CrawlerVO>();
-		Random random = new Random();
-		if (!CrawlerUtil.crawlerVOs.isEmpty()) {
-			for (int i = 0; i < ConstantUtil.NEWSNUMBER; i++) {
-				CrawlerVO crawlerVO = CrawlerUtil.crawlerVOs.get(random
-						.nextInt(CrawlerUtil.crawlerVOs.size()));
-				if (!list.contains(crawlerVO)) {
-					list.add(crawlerVO);
-				}else {			//排除掉重复的记录
-					i--;
-				}
-			}
-		}
-		return list;
-	}
 }
