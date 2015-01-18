@@ -205,6 +205,12 @@ ul, ul li {
 /**我的主页结束**/
 
 /***用户登陆***/
+.login_loginui {
+	width: 580px;
+	background-color: #fff;
+	margin: auto;
+	padding: 20px;
+}
 .input_form_table {
 	margin: 20px auto;
 }
@@ -252,5 +258,12 @@ ul, ul li {
 	height: 90px; 
 	margin-left: 200px;
 	display: none;
+}
+.input_long {
+	border-bottom: 1px solid rgb(129,79,79);
+	border-left: 0;
+	border-right: 0;
+	border-top: 0;
+	width: 360px;
 }
 /***用户登陆结束***/

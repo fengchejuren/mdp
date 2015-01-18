@@ -36,7 +36,7 @@
 <div style="font-size: 18px;font-weight: bolder;color: #7A90C7;margin:10px 5px;">${user.username}:</div>
 	&nbsp;&nbsp;&nbsp;&nbsp;亲，恭喜您已经完成注册。强烈建议您进行邮箱验证，以保护账户安全，获取更多服务。
 	<div class="register_link"><a href="${ctx}/login/valid_email.html" >现在就验证邮箱</a></div>
-	<div class="register_link"><a href="" >暂时不验证</a></div>
+	<div class="register_link"><a href="${ctx}/homepage/index.html" >暂时不验证</a></div>
 <div class="dividing_line"></div>
 <div class="register_success">
 &nbsp;&nbsp;&nbsp;&nbsp;通过邮箱验证，您可以：<br/>

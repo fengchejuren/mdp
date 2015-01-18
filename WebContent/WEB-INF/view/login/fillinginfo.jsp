@@ -10,15 +10,11 @@
 <script src="${ctx}/js/jquery_2.1.3.js"></script>
 <script src="${ctx}/js/easyui/jquery.easyui.min.js"></script>
 <script src="${ctx}/js/easyui/jquery.validatebox.js"></script>
+<script language="javascript" type="text/javascript" src="${ctx}/js/My97DatePicker/WdatePicker.js"></script>
 <script src="${ctx}/js/common.js"></script>
 <script type="text/javascript">
-$("#login_form").form({
-	onSubmit:function(){
-		return $(this).form("validate");
-	},
-	success:function(data){
-		$.messager.alert('Info', data, 'info');
-	}
+$(document).ready(function(){
+	$("#birthday").click(function(){WdatePicker();});
 });
 </script>
 </head>
@@ -30,15 +26,20 @@ $("#login_form").form({
 <!-- 导航栏 -->
 <%@include file="../include/navigationbar.jsp" %>
 <div class="login_loginui">
+尊敬的${user.username}，请完善以下资料：
 <form class="login_form" action="${ctx}/login/registerCheck.html" id="login_form" method="post">
 <table class="input_form_table">
 	<tr>
-		<td class="left">用户名：</td>
-		<td class="right"><input type="text" name="username" value="${user.username}" class="input easyui-validatebox" missingMessage="请输入用户名"  required="required" /></td>
+		<td class="left">性别：</td>
+		<td class="right">男<input type="radio" name="sex" value="0" checked="checked">&nbsp;&nbsp;&nbsp;&nbsp;女<input type="radio" name="sex" value="1"/></td>
 	</tr>
 	<tr>
-		<td class="left">常用邮箱：</td>
-		<td class="right"><input type="email" name="email" value="${user.email}" class="input easyui-validatebox" required="required" validType="email" missingMessage="请输入邮箱地址" invalidMessage="你输入的邮箱不合法" /></td>
+		<td class="left">出生日期：</td>
+		<td class="right"><input name="birthday" id="birthday" class="Wdate" /></td>
+	</tr>
+	<tr>
+		<td class="left">我的网站：</td>
+		<td class="right"><input name="mysite" placeholder="把网店、微博等网址放到这儿，有机会我们会推荐的哦！" id="mysite" class="input_long" /></td>
 	</tr>
 	<tr>
 		<td colspan="2" style="text-align: right;"><input type="submit" class="submit_but" id="submit" value="确定"></td>

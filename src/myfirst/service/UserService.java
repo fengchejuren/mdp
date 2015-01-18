@@ -31,7 +31,9 @@ public class UserService extends BaseService<User, Integer> {
 			String str = new String(bytes);
 			String[] strInfo = str.split("\\|");
 			long now = new  Date().getTime();
-			if(strInfo.length!=4 || now-Long.valueOf(strInfo[3])>ConstantUtil.DIVIDED_TIME){
+			if(strInfo.length!=4){
+				throw new BusinessException("此链接为非法链接！");
+			}else if(now-Long.valueOf(strInfo[3])>ConstantUtil.DIVIDED_TIME){
 				throw new BusinessException("此链接已经过期，请您重新操作！");
 			}
 			user = new User();
@@ -39,7 +41,6 @@ public class UserService extends BaseService<User, Integer> {
 			user.setPassword(strInfo[1]);
 			user.setEmail(strInfo[2]);
 			user.setRegisterTime(new Date());
-			doSave(user);
 			return user;
 	}
 
@@ -58,9 +59,9 @@ public class UserService extends BaseService<User, Integer> {
 		buffer.append("<html><body>");
 		buffer.append("尊敬的");
 		buffer.append(user.getUsername());
-		buffer.append(":<br>&nbsp; 亲，是你吗，是你在<a href='http://localhost:8080/mdp/homepage/index.html' target='_top' style='text-decoration: NONE;'>我的地盘</a>网站上用此邮箱注册了账号吗？猛戳<a href='http://localhost:8080/mdp/login/doAddRegisterInfo.html?info=");
+		buffer.append(":<br>&nbsp; 亲，是你吗，是你在<a href='http://localhost:8080/mdp/homepage/index.html' target='_top' style='text-decoration: NONE;'>我的地盘</a>网站上用此邮箱注册了账号吗？猛戳<a href='http://localhost:8080/mdp/login/fillingInfo.html?info=");
 		buffer.append(s);
-		buffer.append("' target='_top' style='text-decoration: NONE;'>这儿</a>，或者将下面的网址复制到地址栏中直接访问，完成注册。为了你的账户安全，本链接仅在10分钟之内有效。小伙伴，赶快飞起来去抢我的地盘吧！<br>&nbsp;&nbsp;http://localhost:8080/mdp/login/doAddRegisterInfo.html?info=");
+		buffer.append("' target='_top' style='text-decoration: NONE;'>这儿</a>，或者将下面的网址复制到地址栏中直接访问，完成注册。为了你的账户安全，本链接仅在10分钟之内有效。小伙伴，赶快飞起来去抢我的地盘吧！<br>&nbsp;&nbsp;http://localhost:8080/mdp/login/fillingInfo.html?info=");
 		buffer.append(s);
 		buffer.append("<div style='width:100%;border-bottom:1px solid #ccc;margin:10px 0;'>&nbsp;&nbsp;如果不是你本人操作，那么就忽略它吧！当然，也请你注意自己个人信息的保密，必要时请修改邮箱密码！");
 		buffer.append("</body></html");

@@ -11,9 +11,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import myfirst.base.BaseController;
 import myfirst.domain.pojo.User;
+import myfirst.exception.BusinessException;
 import myfirst.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,7 @@ public class LoginController extends BaseController {
 		return "login/login_index";
 	}
 	
-	/**注册页
+	/**注册对话框
 	 * @return
 	 */
 	@RequestMapping(value = "/register.html")
@@ -49,32 +51,44 @@ public class LoginController extends BaseController {
 		return "login/register";
 	}
 	
-	/**保存用户
+	/**注册时保存用户
 	 * @return
 	 */
 	@RequestMapping(value = "/doregister.html")
-	public ModelAndView registerPage(User user){
+	public ModelAndView registerPage(HttpSession session,User user){
 		user.setRegisterTime(new Date());
-		//userService.doSave(user);
+		session.setAttribute("user", user);
+		userService.doSave(user);		//保存用户
 		return new ModelAndView("login/success");
 	}
 
-	/**保存用户的注册信息
+	/**完善用户信息
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/doAddRegisterInfo.html")
-	public ModelAndView doAddRegisterInfo(HttpServletRequest request) throws Exception{
+	@RequestMapping(value="/fillingInfo.html")
+	public ModelAndView doAddRegisterInfo(HttpServletRequest request,HttpSession session) throws Exception{
+		User user = (User) session.getAttribute("user");	//登录者的user信息
 		String info = request.getParameter("info");
-		logger.debug(info);
-		User user = userService.doAddRegisterInfo(info);
-		if(user == null){
-			throw new Exception();
+		User user2 = userService.doAddRegisterInfo(info);	//验证链接传递过来的user信息
+		if(!user.getUsername().equals(user2.getUsername()) || !user.getEmail().equals(user2.getEmail())){
+			throw new BusinessException("登陆者的邮箱和验证邮箱不匹配！");
 		}
-		request.getSession().setAttribute("user", user);
 		return new ModelAndView("login/fillinginfo");
 	}
 	
+	
+	/** 发送邮件进行邮箱验证
+	 * returns:ModelAndView  
+	 * @see any changes please send mail to:superman166@126.com  
+	 * ~!^ keep bugs away and code of god with u!	
+	 */
+	@RequestMapping(value="/valid_email.html")
+	public ModelAndView validEmail(HttpSession session){
+		User user = (User) session.getAttribute("user");
+		userService.sendRegisterCheckInfoMail(user);
+		return new ModelAndView("login/send_email_ok");
+	}
 	/**用户登录
 	 * @see any changes please send mail to:superman166@126.com  
 	 * ~!^ keep bugs away and code of god with u!	
