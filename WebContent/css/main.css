@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 html, body {
-	margin: 5px 0;
+	margin: 0;
 	font-size: 16px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	background: #DAEFEA;
@@ -48,14 +48,16 @@ ul, ul li {
 }
 
 .navigation_bar {
-	padding-left: 50px;
 	text-align: center;
 	height: 50px;
 	line-height: 50px;
 	background-color: #7A90C7;
 	background-attachment: scroll;
 	background-image: url(../images/home.jpg);
-	background-repeat: no-repeat
+	background-repeat: no-repeat;
+	width: 75%;
+	min-width: 800px;
+	margin: auto;
 }
 
 .navigation_bar ul {
@@ -97,7 +99,7 @@ ul, ul li {
 	background: none repeat scroll 0 0 #9b9e9c;
 	cursor: pointer;
 	width: 80px;
-	margin-left: 5%;
+	margin-left: 3%;
 	z-index: 999;
 }
 
@@ -113,7 +115,7 @@ ul, ul li {
 	background: none repeat scroll 0 0 #9b9e9c;
 	cursor: pointer;
 	width: 80px;
-	margin-right: 5%;
+	margin-right: 3%;
 	z-index: 999;
 }
 

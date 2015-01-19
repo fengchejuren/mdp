@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * @Description: TODO
@@ -38,7 +39,7 @@ public class LoginController extends BaseController {
 	/**登陆主页
 	 * @return
 	 */
-	@RequestMapping(value = "/index.html")
+	@RequestMapping(value = "/login.html")
 	public String loginPage() {
 		return "login/login_index";
 	}
@@ -57,6 +58,7 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "/doregister.html")
 	public ModelAndView registerPage(HttpSession session,User user){
 		user.setRegisterTime(new Date());
+		user.setLastVisitTime(new Date());
 		session.setAttribute("user", user);
 		userService.doSave(user);		//保存用户
 		return new ModelAndView("login/success");
@@ -89,6 +91,7 @@ public class LoginController extends BaseController {
 		userService.sendRegisterCheckInfoMail(user);
 		return new ModelAndView("login/send_email_ok");
 	}
+	
 	/**用户登录
 	 * @see any changes please send mail to:superman166@126.com  
 	 * ~!^ keep bugs away and code of god with u!	
@@ -101,4 +104,12 @@ public class LoginController extends BaseController {
 		//loginService.delete(user2);
 		return null;
 	}
+	
+	@RequestMapping(value="/loginOut.html")
+	public ModelAndView loginOut(HttpSession session){
+		session.removeAttribute("user");
+		return new ModelAndView(new RedirectView("../homepage/index.html"));
+	}
+	
+	
 }

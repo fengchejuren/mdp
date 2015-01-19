@@ -25,10 +25,10 @@ $(document).ready(function(){
 <body>
 <!-- 广告栏 -->
 <%@include file="../include/ad.jsp" %>
-<!--下面是主要内容-->
-<div class="content">
 <!-- 导航栏 -->
 <%@include file="../include/navigationbar.jsp" %>
+<!--下面是主要内容-->
+<div class="content">
 <div class="login_loginui">
 <form class="login_form ui_form" action="${ctx}/login/doregister.html" id="login_form" method="post">
 <table class="input_form_table">
