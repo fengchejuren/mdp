@@ -10,10 +10,10 @@
 </head>
 <body>
 <%@include file="../include/ad.jsp" %>
-<!--下面是主要内容-->
-<div class="content">
 <!-- 导航栏 -->
 <%@include file="../include/navigationbar.jsp" %>
+<!--下面是主要内容-->
+<div class="content">
  <div class="filecontent">
  <form action="${ctx}/file/filelistup.html" method="post" enctype="multipart/form-data">
  <table>

@@ -11,10 +11,10 @@
 <body>
 <!-- 广告侧边栏 -->
 <%@include file="../include/ad.jsp" %>
-<!--下面是主要内容-->
-<div class="content">
 <!-- 导航栏 -->
 <%@include file="../include/navigationbar.jsp" %>
+<!--下面是主要内容-->
+<div class="content">
  你已成功上传文件,感谢你无私的分享.
 </div>
 </body>

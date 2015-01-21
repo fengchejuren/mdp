@@ -21,10 +21,10 @@ $(document).ready(function(){
 <body>
 <!-- 广告栏 -->
 <%@include file="../include/ad.jsp" %>
-<!--下面是主要内容-->
-<div class="content">
 <!-- 导航栏 -->
 <%@include file="../include/navigationbar.jsp" %>
+<!--下面是主要内容-->
+<div class="content">
 <div class="login_loginui">
 尊敬的${user.username}，请完善以下资料：
 <form class="login_form" action="${ctx}/login/registerCheck.html" id="login_form" method="post">

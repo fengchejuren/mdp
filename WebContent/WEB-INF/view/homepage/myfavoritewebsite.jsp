@@ -106,10 +106,10 @@ function dosubmit(){
 <body>
 <!-- 广告栏 -->
 <%@include file="../include/ad.jsp" %>
-<!--下面是主要内容-->
-<div class="content">
 <!-- 导航栏 -->
 <%@include file="../include/navigationbar.jsp" %>
+<!--下面是主要内容-->
+<div class="content">
 <div class="myfavoritewebsite">
 	<input type="button" class="submit_but" value="保 存" />
 	<div style="clear:both;"></div>

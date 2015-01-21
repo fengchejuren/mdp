@@ -98,9 +98,15 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping(value = "/logincheck.html")
 	public ModelAndView loginCheck(HttpServletRequest request,
-			User user) {
+			User user,HttpSession session) {
 		String username = user.getUsername();
+		String password = user.getPassword();
 		List<User> list = userService.findByUsername(username);
+		User user2 = list.get(0);
+		if(password.equals(user2.getPassword())){
+			session.setAttribute("user", user2);
+			return new ModelAndView(new RedirectView("../homepage/index.html"));
+		}
 		//loginService.delete(user2);
 		return null;
 	}

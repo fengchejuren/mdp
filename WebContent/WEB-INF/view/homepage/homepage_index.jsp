@@ -54,10 +54,10 @@ function refreshnews(){
 <body>
 <!-- 广告栏 -->
 <%@include file="../include/ad.jsp" %>
-<!--下面是主要内容-->
-<div class="content">
 <!-- 导航栏 -->
 <%@include file="../include/navigationbar.jsp" %>
+<!--下面是主要内容-->
+<div class="content">
 <div class="homepage_website_nav">
 <h3>网站导航</h3>
 新闻

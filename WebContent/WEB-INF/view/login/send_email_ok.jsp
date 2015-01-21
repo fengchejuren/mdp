@@ -15,10 +15,10 @@
 <body>
 <!-- 广告栏 -->
 <%@include file="../include/ad.jsp" %>
-<!--下面是主要内容-->
-<div class="content">
 <!-- 导航栏 -->
 <%@include file="../include/navigationbar.jsp" %>
+<!--下面是主要内容-->
+<div class="content">
 <div style="font-size: 18px;font-weight: bolder;color: #7A90C7;margin:10px 5px;">${user.username}:</div>
 	&nbsp;&nbsp;&nbsp;&nbsp;亲，验证邮件已经发往您的注册邮箱，请您在10分钟之内登录邮箱，进行验证。
 </div>

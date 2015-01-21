@@ -28,10 +28,10 @@
 <body>
 <!-- 广告栏 -->
 <%@include file="../include/ad.jsp" %>
-<!--下面是主要内容-->
-<div class="content">
 <!-- 导航栏 -->
 <%@include file="../include/navigationbar.jsp" %>
+<!--下面是主要内容-->
+<div class="content">
 <a href="${ctx}/file/file_list.html">上传多个文件</a>
  <div class="filecontent">
  <form action="${ctx}/file/fileup.html" method="post" enctype="multipart/form-data">
